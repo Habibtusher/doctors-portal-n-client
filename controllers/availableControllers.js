@@ -3,7 +3,7 @@ const bookingModal = require("../modeles/bookingModal");
 
 const saveAvailableAppointments = async (req, res, next) => {
   const { name, slots } = req.body;
-
+// console.log("dd", req.headers.Authorization);
   try {
     const newSlots = await appointmentModal.create({
       name: name,
