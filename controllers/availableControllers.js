@@ -3,7 +3,7 @@ const bookingModal = require("../modeles/bookingModal");
 
 const saveAvailableAppointments = async (req, res, next) => {
   const { name, slots } = req.body;
-// console.log("dd", req.headers.Authorization);
+
   try {
     const newSlots = await appointmentModal.create({
       name: name,
@@ -36,7 +36,6 @@ const getAvailableAppointments = async (req, res, next) => {
         (slot) => !bookedSlots.includes(slot)
       );
       option.slots = remainingSlots;
-      
     });
 
     res.status(200).json({
@@ -48,5 +47,15 @@ const getAvailableAppointments = async (req, res, next) => {
     //   next(new AppError(error));
   }
 };
-
-module.exports = { getAvailableAppointments, saveAvailableAppointments };
+const getAppointmentsName = async (req, res, next) => {
+  const query = {};
+  try {
+    const data = await appointmentModal.find(query).select({ "name": 1, "_id": 1});
+    res.status(200).json({
+      status: "success",
+      results: data.length,
+      data: data ? data : [],
+    });
+  } catch (error) {}
+};
+module.exports = { getAvailableAppointments, saveAvailableAppointments,getAppointmentsName };

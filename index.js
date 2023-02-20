@@ -4,6 +4,7 @@ const mongoose = require ("mongoose");
 const AvailableAppointmentRoutes = require("./routes/availableRoutes.js")
 const BookingRoutes = require("./routes/bookingRoutes.js")
 const UsersRoute = require("./routes/userRoutes.js")
+const DoctorsRoute = require("./routes/doctorsRoute.js")
 const port = process.env.PORT || 5000
 const app = express();
 
@@ -15,6 +16,7 @@ require("dotenv").config()
 app.use("/api", AvailableAppointmentRoutes);
 app.use("/api", BookingRoutes);
 app.use("/api", UsersRoute);
+app.use("/api", DoctorsRoute);
 
 app.get('/', async(req,res)=>{
     res.send("hello")

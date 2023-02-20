@@ -10,7 +10,11 @@ const Users = mongoose.Schema({
     email:{
         type:String,
         required: [true, "Please provide a email"],
-    }
+    },
+    role:{
+        type:String,
+        default: 'user'
+    },
 
 })
 const users =  mongoose.model("users",Users)

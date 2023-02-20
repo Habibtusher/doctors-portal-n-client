@@ -32,10 +32,17 @@ const saveBookings = async (req, res, next) => {
 
 const getBooking = async (req, res) => {
   const email = req.query.email;
-
+  const decodeEmail = req.decoded?.email;
   const query = {
     email: email,
   };
+  if (decodeEmail != email) {
+    return res.status(403).json({
+      status: "err",
+      message: "forbidden access",
+      data: [],
+    });
+  }
   const bookings = await bookingModal.find(query);
   res.status(201).json({
     status: "success",
@@ -44,4 +51,4 @@ const getBooking = async (req, res) => {
   });
 };
 
-module.exports = { saveBookings,getBooking };
+module.exports = { saveBookings, getBooking };
