@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb");
 const bookingModal = require("../modeles/bookingModal");
 
 const saveBookings = async (req, res, next) => {
@@ -50,5 +51,23 @@ const getBooking = async (req, res) => {
     data: bookings,
   });
 };
+const getBookingById = async (req, res) => {
+  const id = req.params.id;
 
-module.exports = { saveBookings, getBooking };
+  const query = {
+    _id: new ObjectId(id),
+  };
+  try {
+    const booking = await bookingModal.findOne(query);
+    res.status(201).json({
+      status: "success",
+      message: "",
+      data: booking,
+    });
+  } catch (error) {
+    
+  }
+
+};
+
+module.exports = { saveBookings, getBooking,getBookingById };

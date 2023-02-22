@@ -58,4 +58,24 @@ const getAppointmentsName = async (req, res, next) => {
     });
   } catch (error) {}
 };
-module.exports = { getAvailableAppointments, saveAvailableAppointments,getAppointmentsName };
+const updateAvailableAppointment = async (req, res)=>{
+  const  filter = {}
+  const updatedDoc = {
+    $set: {
+      price: 99,
+    },
+  };
+  const options = { upsert: true };
+  try {
+    const results = await appointmentModal.updateMany(filter,updatedDoc)
+    res.status(201).json({
+      status: "success",
+      message: "update successfully!",
+      data: results,
+    });
+  } catch (error) {
+    
+  }
+
+}
+module.exports = { getAvailableAppointments, saveAvailableAppointments,getAppointmentsName,updateAvailableAppointment};

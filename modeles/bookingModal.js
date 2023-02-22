@@ -26,7 +26,18 @@ const BookingAppointments = mongoose.Schema({
     treatment:{
         type: String,
         required: [true, "Please provide a teatment"],
-    }
+    },
+    price:{
+        type: Number,
+       
+    },
+    paid:{
+        type: Boolean,
+       
+    },
+    transactionId: {
+        type: String,
+      }
 })
 const bookingAppointments =  mongoose.model("bookingAppointments",BookingAppointments)
 module.exports= bookingAppointments

@@ -96,4 +96,21 @@ const isAdmin = async(req,res)=>{
       
 
 }
-module.exports = { createUser, genarateToken, getUser, updateUser,isAdmin };
+const deleteUser = async (req, res) => {
+  const id = req.params.id
+    const query = {
+      _id:new ObjectId(id)
+    }
+    try {
+      const user = await userModel.deleteOne(query);
+      res.status(201).json({
+        status: "success",
+        message: "User Delete Successfully!",
+        data: user,
+      });
+    } catch (error) {
+      res.send(error);
+      //   next(new AppError(error, 400));
+    }
+  };
+module.exports = { createUser, genarateToken, getUser, updateUser,isAdmin,deleteUser };

@@ -9,6 +9,9 @@ const AvaiableAppointments = mongoose.Schema({
     },
     slots:{
         type: Array
+    },
+        price:{
+            type: Number
     }
 })
 const avaiableAppointments =  mongoose.model("avaiableAppointments",AvaiableAppointments)
