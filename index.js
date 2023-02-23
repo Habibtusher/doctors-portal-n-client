@@ -9,9 +9,7 @@ const DoctorsRoute = require("./routes/doctorsRoute.js");
 const PaymentRoute = require("./routes/paymentRoutes.js");
 const port = process.env.PORT || 5000;
 const app = express();
-const stripe = require("stripe")(
-  "sk_test_51MeB7iKdkM5q6ytT3C8iVkkgFZDUyb6Bm8Mtq05jGhg5YQZ4BFKzfMJsmNdaJEFAh5MM3YpD5oQNZxvbN0RhIXzx00DgJagItR"
-);
+const stripe = require("stripe")(process.env.STRIPE_SECREC_KEY);
 // Middleware
 app.use(express.static("public"));
 app.use(express.json());
