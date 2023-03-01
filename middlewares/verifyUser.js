@@ -1,14 +1,11 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("../modeles/usersModel");
+const AppError = require("./appError");
 const VerifyToken = (req, res, next) => {
   const auth_token = req.headers.authorization;
 
   if (!auth_token) {
-    return res.status(401).json({
-      status: "err",
-      message: "unauthorized user",
-      data: "",
-    });
+    return next(new AppError('unauthorized user',401))
   }
 
   const token = auth_token.split(" ")[1];
@@ -29,11 +26,12 @@ const VerifyAdmin = async (req, res, next) => {
   const auth_token = req.headers.authorization;
 
   if (!auth_token) {
-    return res.status(401).json({
-      status: "err",
-      message: "unauthorized user",
-      data: "",
-    });
+    return next(new AppError('unauthorized user',401))
+    // return res.status(401).json({
+    //   status: "err",
+    //   message: "unauthorized user",
+    //   data: "",
+    // });
   }
 
   const token = auth_token.split(" ")[1];

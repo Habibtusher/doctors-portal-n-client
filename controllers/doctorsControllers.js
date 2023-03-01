@@ -1,8 +1,9 @@
 const { ObjectId } = require("mongodb");
+const AppError = require("../middlewares/appError");
 const doctorsModel = require("../modeles/doctorsModel")
 
 
-const addDocotrs = async (req, res) => {
+const addDocotrs = async (req, res,next) => {
     const doctor = req.body;
     try {
       const newDoctor = await doctorsModel.create(doctor);
@@ -12,8 +13,8 @@ const addDocotrs = async (req, res) => {
         data: newDoctor,
       });
     } catch (error) {
-      res.send(error);
-      //   next(new AppError(error, 400));
+      // res.send(error);
+        next(new AppError(error, 400));
     }
   };
 const getDocotrs = async (req, res) => {
